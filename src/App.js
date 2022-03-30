@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from 'react'
 
-function App() {
+import GameGrid from './components/GameGrid'
+import Keyboard from './components/Keyboard'
+import { DefaultGrid } from './components/DefaultGrid'
+
+export const AppContext = createContext()
+
+const App = () => {
+  const [grid, setGrid] = useState(DefaultGrid)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <nav>
+        <h1>Fordle</h1>
+      </nav>
+      <AppContext.Provider value={{ grid, setGrid}}>
+        <GameGrid />
+        <Keyboard />
+      </AppContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
